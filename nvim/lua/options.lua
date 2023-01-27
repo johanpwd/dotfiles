@@ -30,4 +30,6 @@ o.laststatus = 3
 o.mouse = ""
 o.guicursor = ""
 
+g.netrw_banner = 0
+
 vim.cmd("language en_US.UTF-8")
