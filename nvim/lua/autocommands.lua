@@ -6,7 +6,7 @@ local StripTrailingSpaceGroup = a.nvim_create_augroup("StripTrailingSpaceGroup",
 a.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	group = StripTrailingSpaceGroup,
-	command = "%s/s+$//e",
+	command = "%s/\\s\\+$//e",
 })
 
 -- Show what is being yanked
