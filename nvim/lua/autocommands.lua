@@ -20,6 +20,8 @@ a.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Remember cursor position when opening neovim again
+-- This is a rewrite of farmergreg/vim-lastplace done by me, and could probably be
+-- it's own plugin but I can't be bothered right now.
 local RememberGroup = a.nvim_create_augroup("RememberGroup", { clear = true })
 a.nvim_create_autocmd("BufWinEnter", {
 	pattern = "*",
