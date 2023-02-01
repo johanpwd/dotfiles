@@ -49,3 +49,8 @@ vim.cmd([[
   cabbr Q q
   cabbr Wq wq
 ]])
+
+-- I want to the nvim help to open vertically and not horizontally
+vim.cmd([[
+  cnorea help vertical help
+]])
