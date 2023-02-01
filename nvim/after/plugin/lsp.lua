@@ -1,7 +1,8 @@
 local lsp = require("lspconfig")
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local on_attach = function(client, bufnr)
+  -- Automatically format
   if client.supports_method("textDocument/formatting") then
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
@@ -10,6 +11,19 @@ local on_attach = function(client, bufnr)
         vim.lsp.buf.format({
           bufnr = bufnr,
         })
+      end,
+    })
+  end
+
+  -- Handle golang imports automatically
+  if client.name == "gopls" then
+    local augroup = vim.api.nvim_create_augroup("GolangImports", {})
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
       end,
     })
   end
@@ -39,4 +53,8 @@ lsp.sumneko_lua.setup({
       },
     },
   },
+})
+
+lsp.gopls.setup({
+  on_attach = on_attach,
 })
