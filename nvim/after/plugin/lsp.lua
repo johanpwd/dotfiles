@@ -1,5 +1,12 @@
 local lsp = require("lspconfig")
 local on_attach = function(client, bufnr)
+  local keymap_options = { noremap = true, silent = true, buffer = bufnr }
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, keymap_options)
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, keymap_options)
+  vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, keymap_options)
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, keymap_options)
+  vim.keymap.set("n", "g0", vim.lsp.buf.document_symbol, keymap_options)
+
   -- Automatically format
   if client.supports_method("textDocument/formatting") then
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
