@@ -14,46 +14,52 @@ local packer_bootstrap = ensure_packer()
 vim.cmd [[packadd packer.nvim]]
 
 require("packer").init({
-  display = {
-    open_fn = function()
-      return require("packer.util").float({ border = "rounded" })
-    end,
-  }
+    display = {
+        open_fn = function()
+          return require("packer.util").float({ border = "rounded" })
+        end,
+    }
 })
 
 return require("packer").startup(function(use)
-  use({ "wbthomason/packer.nvim" })
-  use({
-    "gruvbox-community/gruvbox",
-    config = function()
-      vim.cmd([[
+      use({ "wbthomason/packer.nvim" })
+      use({
+          "gruvbox-community/gruvbox",
+          config = function()
+            vim.cmd([[
 				let g:gruvbox_colors = { 'bg0': ['#000000', 0]}
 				colorscheme gruvbox
 				highlight clear CursorLineNr
-			]]  )
-      vim.g.gruvbox_bold = 1
-      vim.g.gruvbox_italic = 1
-      vim.g.gruvbox_underline = 1
-    end
-  })
-  use({
-    { "nvim-treesitter/nvim-treesitter" },
-    { "nvim-treesitter/playground" },
-    run = ":TSUpdate",
-  })
-  use({ "mbbill/undotree" })
-  use({ "nvim-lua/plenary.nvim" })
-  use({ "kyazdani42/nvim-web-devicons" })
-  use({ "nvim-lualine/lualine.nvim" })
-  use({ "numToStr/Comment.nvim" })
+			]])
+            vim.g.gruvbox_bold = 1
+            vim.g.gruvbox_italic = 1
+            vim.g.gruvbox_underline = 1
+          end
+      })
+      use({
+          { "nvim-treesitter/nvim-treesitter" },
+          { "nvim-treesitter/playground" },
+          run = ":TSUpdate",
+      })
+      use({ "mbbill/undotree" })
+      use({ "nvim-lua/plenary.nvim" })
+      use({ "kyazdani42/nvim-web-devicons" })
+      use({ "nvim-lualine/lualine.nvim" })
+      use({ "numToStr/Comment.nvim" })
 
-  use({
-    { "williamboman/mason.nvim" },
-    { "williamboman/mason-lspconfig.nvim" },
-    { "neovim/nvim-lspconfig" },
-  })
+      use({
+          { "williamboman/mason.nvim" },
+          { "williamboman/mason-lspconfig.nvim" },
+          { "neovim/nvim-lspconfig" },
+      })
 
-  if packer_bootstrap then
-    require("packer").sync()
-  end
-end)
+      use({
+          { "hrsh7th/nvim-cmp" },
+          { "hrsh7th/cmp-nvim-lsp" },
+          { "L3MON4D3/LuaSnip" },
+      })
+
+      if packer_bootstrap then
+        require("packer").sync()
+      end
+    end)
